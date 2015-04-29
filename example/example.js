@@ -9,7 +9,8 @@ domready(function() {
     ColorPicker
   */
   var colorPicker = new ColorPicker({
-    el: document.body
+    el: document.body,
+    background: 'dimgrey'
   }).onChange(function(hexStringColor) {
     document.body.style.background = hexStringColor;
   });
