@@ -10,8 +10,11 @@ domready(function() {
   */
   var colorPicker = new ColorPicker({
     el: document.body,
+    color: 'rgb(42, 69, 94)',
     background: 'dimgrey'
-  }).onChange(function(hexStringColor) {
+  });
+  colorPicker.onChange(function(hexStringColor) {
     document.body.style.background = hexStringColor;
+    document.querySelector('h1 a').style.color = colorPicker.color.dark() ? 'white' : 'black';
   });
 });
