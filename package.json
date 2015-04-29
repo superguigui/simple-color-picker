@@ -11,6 +11,14 @@
     "css:watch": "stylus -u autoprefixer-stylus src/css -w ",
     "test": "browserify test/test.js -t browserify-css | tap-closer | smokestack | faucet"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/superguigui/simple-color-picker.git"
+  },
+  "homepage": "http://superguigui.github.io/simple-color-picker",
+  "bugs": {
+    "url": "https://github.com/superguigui/simple-color-picker/issues"
+  },
   "keywords": [
     "color",
     "picker",
