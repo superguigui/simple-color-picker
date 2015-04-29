@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run example & npm run css:watch",
     "example": "budo example/example.js:example/example-build.js --live -t browserify-css | garnish",
-    "example:build": "browserify example/example.js -o example/example-build.js -t browserify-css",
+    "example:build": "browserify example/example.js -t browserify-css | uglifyjs -nm > example/example-build.js",
     "css": "stylus -u autoprefixer-stylus src/css",
     "css:watch": "stylus -u autoprefixer-stylus src/css -w ",
     "test": "browserify test/test.js -t browserify-css | tap-closer | smokestack | faucet"
