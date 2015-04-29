@@ -6,6 +6,9 @@ Simple Color picker in common.js that doesn't rely on jQuery. The color manipula
 
 [demo](http://superguigui.github.io/simple-color-picker)
 
+## Installation
+[![NPM](https://nodei.co/npm/simple-color-picker.png)](https://nodei.co/npm/simple-color-picker/)
+
 ## Quickstart
 ```javascript
 var ColorPicker = require('simple-color-picker');
