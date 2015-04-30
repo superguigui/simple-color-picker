@@ -14,6 +14,7 @@ function SimpleColorPicker(options) {
   options = options || {};
   this.color = null;
   this._hueColor = null;
+  this.choosing = false;
   this.callbacks = [];
 
   // bind methods to scope (only if needed)
@@ -106,6 +107,11 @@ SimpleColorPicker.prototype.onChange = function(callback) {
   this.on('update', callback);
 };
 
+SimpleColorPicker.prototype.close = function() {
+  this._onSaturationMouseUp();
+  this._onHueMouseUp();
+};
+
 /* ============================================================================= 
   "Private" Methods LOL silly javascript
 ============================================================================= */
@@ -159,6 +165,7 @@ SimpleColorPicker.prototype._updateColor = function() {
   Events
 ============================================================================= */
 SimpleColorPicker.prototype._onSaturationMouseDown = function(e) {
+  this.choosing = true;
   var sbOffset = offset(this.$saturation);
   this._moveSelectorTo(e.clientX - sbOffset.left, e.clientY - sbOffset.top);
   window.addEventListener('mouseup', this._onSaturationMouseUp);
@@ -172,11 +179,13 @@ SimpleColorPicker.prototype._onSaturationMouseMove = function(e) {
 };
 
 SimpleColorPicker.prototype._onSaturationMouseUp = function(e) {
+  this.choosing = false;
   window.removeEventListener('mouseup', this._onSaturationMouseUp);
   window.removeEventListener('mousemove', this._onSaturationMouseMove);
 };
 
 SimpleColorPicker.prototype._onHueMouseDown = function(e) {
+  this.choosing = true;
   var hOffset = offset(this.$hue);
   this._moveHueTo(e.clientY - hOffset.top);
   window.addEventListener('mouseup', this._onHueMouseUp);
@@ -190,6 +199,7 @@ SimpleColorPicker.prototype._onHueMouseMove = function(e) {
 };
 
 SimpleColorPicker.prototype._onHueMouseUp = function(e) {
+  this.choosing = false;
   window.removeEventListener('mouseup', this._onHueMouseUp);
   window.removeEventListener('mousemove', this._onHueMouseMove);
 };
