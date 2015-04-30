@@ -1,15 +1,15 @@
 {
   "name": "simple-color-picker",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "lightweight color picker in commonjs",
-  "main": "./src/index.js",
+  "main": "./index.js",
   "scripts": {
     "start": "npm run example & npm run css:watch",
-    "example": "budo example/example.js:example/example-build.js --live -t browserify-css | garnish",
-    "example:build": "browserify example/example.js -t browserify-css | uglifyjs -nm > example/example-build.js",
-    "css": "stylus -u autoprefixer-stylus src/css",
-    "css:watch": "stylus -u autoprefixer-stylus src/css -w ",
-    "test": "browserify test/test.js -t browserify-css | tap-closer | smokestack | faucet"
+    "example": "budo example/example.js:example/example-build.js --live | garnish",
+    "example:build": "browserify example/example.js | uglifyjs -nm > example/example-build.js",
+    "css": "stylus -u autoprefixer-stylus src/css -o ./",
+    "css:watch": "stylus -u autoprefixer-stylus src/css -w -o ./",
+    "test": "browserify test/test.js | tap-closer | smokestack | faucet"
   },
   "repository": {
     "type": "git",

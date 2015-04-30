@@ -5,14 +5,11 @@ var transform = require('dom-transform');
 var Color = require('color');
 var Emitter = require('component-emitter');
 var isNumber = require('is-number');
-var offset = require('./utils/dom/offset');
-var clamp = require('./utils/maths/clamp');
-var createColor = require('./utils/createColor');
-var css = require('./css/style.css');
-
+var offset = require('./src/utils/dom/offset');
+var clamp = require('./src/utils/maths/clamp');
+var createColor = require('./src/utils/createColor');
 
 function SimpleColorPicker(options) {
-
   // options
   options = options || {};
   this.color = null;
@@ -49,18 +46,15 @@ function SimpleColorPicker(options) {
   this.$saturation.addEventListener('mousedown', this._onSaturationMouseDown);
   this.$hue.addEventListener('mousedown', this._onHueMouseDown);
 
+  this.setSize(options.width || 150,  options.height || 150)
+
   // some styling and doming from options
   if(options.el) {
     this.appendTo(options.el);
   }
   if(options.background) {
+    this.$el.style.padding = '5px';
     this.$el.style.background = createColor(options.background).hexString();
-  }
-  if(options.width && isNumber(options.width)) {
-    this.$el.style.width = options.width + 'px';
-  }
-  if(options.height && isNumber(options.width)) {
-    this.$el.style.height = options.height + 'px';
   }
   
   setTimeout(function() {
@@ -72,14 +66,22 @@ function SimpleColorPicker(options) {
 
 Emitter(SimpleColorPicker.prototype);
 
+SimpleColorPicker.prototype.setSize = function(width, height) {
+  this.width = width;
+  this.height = height;
+  this.saturationWidth = this.width - 25;
+  this.$el.style.width = this.width + 'px';
+  this.$el.style.height = this.height + 'px';
+};
+
 SimpleColorPicker.prototype.setColor = function(color) {
   this.color = createColor(color);
   this._hueColor = this.color.clone().saturation(100).lightness(50);
   if(this.color.saturation() === 0) {
     this._hueColor.red(255);
   }
-  this._moveSelectorTo((this.color.saturationv() / 100) * (this.$saturation.offsetWidth - 5) + 5, (1 - (this.color.value() / 100)) * (this.$saturation.offsetHeight - 2) + 5);
-  this._moveHueTo((1 - (this._hueColor.hue() / 360)) * (this.$hue.offsetHeight - 2) + 4);
+  this._moveSelectorTo((this.color.saturationv() / 100) * (this.saturationWidth - 5) + 5, (1 - (this.color.value() / 100)) * (this.height - 2) + 5);
+  this._moveHueTo((1 - (this._hueColor.hue() / 360)) * (this.height - 2) + 4);
 };
 
 SimpleColorPicker.prototype.remove = function() {
@@ -108,8 +110,8 @@ SimpleColorPicker.prototype.onChange = function(callback) {
   "Private" Methods LOL silly javascript
 ============================================================================= */
 SimpleColorPicker.prototype._moveSelectorTo = function(x, y) {
-  var maxX = this.$saturation.offsetWidth - 5;
-  var maxY = this.$saturation.offsetHeight - 5;
+  var maxX = this.saturationWidth - 5;
+  var maxY = this.height - 5;
 
   x = clamp(x - 5, 0, maxX);
   y = clamp(y - 5, 0, maxY);
@@ -126,7 +128,7 @@ SimpleColorPicker.prototype._moveSelectorTo = function(x, y) {
 };
 
 SimpleColorPicker.prototype._moveHueTo = function(y) {
-  var maxY = this.$hue.offsetHeight - 2;
+  var maxY = this.height - 2;
   
   y = clamp(y - 4, 0, maxY);
   

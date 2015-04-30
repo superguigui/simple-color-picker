@@ -2,7 +2,7 @@
 var domready = require('domready');
 
 // guigui
-var ColorPicker = require('../src/index.js');
+var ColorPicker = require('../index.js');
 
 domready(function() {
   /* --------------------------

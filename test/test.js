@@ -1,6 +1,6 @@
 
 var test = require('tape');
-var SimpleColorPicker = require('../src');
+var SimpleColorPicker = require('..');
 
 test('SimpleColorPicker', function(t) {
   t.plan(1);

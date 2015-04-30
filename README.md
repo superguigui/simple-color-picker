@@ -16,6 +16,9 @@ var ColorPicker = require('simple-color-picker');
 var colorPicker = new ColorPicker();
 ```
 
+And include 'simple-color-picker.css' in your html or import it in your css.
+
+
 You can retrieve the current color with `colorPicker.color`. It will return a [harthur/color](https://github.com/harthur/color) instance. If you prefer a simple hex string use `colorPicker/getHexString();`
 
 ## Options
