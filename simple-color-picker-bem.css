@@ -41,9 +41,14 @@
 }
 .Scp-hSelector {
   position: absolute;
-  background: #fff;
-  border-bottom: 1px solid #000;
+  width: 100%;
+}
+.Scp-hSelector .right {
+  position: absolute;
   right: -3px;
+  background: #fff;
   width: 10px;
   height: 2px;
+  border: none;
+  border-bottom: 1px solid #000;
 }

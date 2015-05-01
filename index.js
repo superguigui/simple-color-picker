@@ -22,26 +22,24 @@ function SimpleColorPicker(options) {
 
   // dom template
   this._template = [
-    '<div class="saturation">',
-      '<div class="brightness"></div>',
-      '<div class="sb-selector"></div>',
+    '<div class="Scp-saturation">',
+      '<div class="Scp-brightness"></div>',
+      '<div class="Scp-sbSelector"></div>',
     '</div>',
-    '<div class="hue">',
-      '<div class="h-selector">',
-        '<div class="right"></div>',
-      '</div>',
+    '<div class="Scp-hue">',
+      '<div class="Scp-hSelector"></div>',
     '</div>'
   ].join('\n');
 
   // dom elements
   this.$el = document.createElement('div');
-  this.$el.className = 'scp';
+  this.$el.className = 'Scp';
   this.$el.innerHTML = this._template;
 
-  this.$saturation = this.$el.querySelector('.saturation');
-  this.$hue = this.$el.querySelector('.hue');
-  this.$sbSelector = this.$el.querySelector('.sb-selector');
-  this.$hSelector = this.$el.querySelector('.h-selector');
+  this.$saturation = this.$el.querySelector('.Scp-saturation');
+  this.$hue = this.$el.querySelector('.Scp-hue');
+  this.$sbSelector = this.$el.querySelector('.Scp-sbSelector');
+  this.$hSelector = this.$el.querySelector('.Scp-hSelector');
 
   // create event listeners
   this.$saturation.addEventListener('mousedown', this._onSaturationMouseDown);
