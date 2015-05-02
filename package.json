@@ -1,7 +1,7 @@
 {
   "name": "simple-color-picker",
-  "version": "0.0.3",
-  "description": "lightweight color picker in commonjs",
+  "version": "0.0.4",
+  "description": "Simple Color picker in common.js.",
   "main": "./index.js",
   "scripts": {
     "start": "npm run example & npm run css:watch",
@@ -9,7 +9,8 @@
     "example:build": "browserify example/example.js | uglifyjs -nm > example/example-build.js",
     "css": "stylus -u autoprefixer-stylus src/css -o ./",
     "css:watch": "stylus -u autoprefixer-stylus src/css -w -o ./",
-    "test": "browserify test/test.js | tap-closer | smokestack | faucet"
+    "test": "browserify test/test.js | tap-closer | smokestack | faucet",
+    "test:nc": "browserify test/test.js | smokestack | faucet"
   },
   "repository": {
     "type": "git",
@@ -46,10 +47,11 @@
     "watchify": "^3.1.2"
   },
   "dependencies": {
-    "color": "^0.8.0",
     "component-emitter": "^1.2.0",
     "dom-transform": "^1.0.1",
+    "is-array": "^1.0.1",
     "is-number": "^1.1.2",
+    "is-object": "^1.0.1",
     "lodash.bindall": "^3.1.0"
   }
 }

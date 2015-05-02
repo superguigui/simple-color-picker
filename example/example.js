@@ -1,8 +1,7 @@
-// Tools
 var domready = require('domready');
 
-// guigui
 var ColorPicker = require('../index.js');
+var Color = require('../src/Color');
 
 domready(function() {
   /* --------------------------
@@ -10,11 +9,15 @@ domready(function() {
   */
   var colorPicker = new ColorPicker({
     el: document.body,
-    color: 'rgb(42, 69, 94)',
-    background: 'dimgrey'
+    color: '#123456',
+    background: '#656565'
   });
   colorPicker.onChange(function(hexStringColor) {
     document.body.style.background = hexStringColor;
-    document.querySelector('h1 a').style.color = colorPicker.color.dark() ? 'white' : 'black';
+    document.querySelector('h1 a').style.color = colorPicker.color.isDark() ? '#FFFFFF' : '#000000';
   });
+
+  var c1 = new Color(0x123456);
+
+  console.log('c1', c1);
 });

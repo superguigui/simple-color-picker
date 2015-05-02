@@ -2,12 +2,11 @@
 
 var bindAll = require('lodash.bindall');
 var transform = require('dom-transform');
-var Color = require('color');
+var Color = require('./src/Color');
 var Emitter = require('component-emitter');
 var isNumber = require('is-number');
 var offset = require('./src/utils/dom/offset');
 var clamp = require('./src/utils/maths/clamp');
-var createColor = require('./src/utils/createColor');
 
 function SimpleColorPicker(options) {
   // options
@@ -45,42 +44,49 @@ function SimpleColorPicker(options) {
   this.$saturation.addEventListener('mousedown', this._onSaturationMouseDown);
   this.$hue.addEventListener('mousedown', this._onHueMouseDown);
 
-  this.setSize(options.width || 150,  options.height || 150)
+  this.setSize(options.width || 175,  options.height || 150)
 
   // some styling and doming from options
-  if(options.el) {
+  if (options.el) {
     this.appendTo(options.el);
   }
-  if(options.background) {
+  if (options.background) {
     this.$el.style.padding = '5px';
-    this.$el.style.background = createColor(options.background).hexString();
+    this.$el.style.background = new Color(options.background).hex;
   }
   
-  setTimeout(function() {
-    this.setColor(options.color);
-  }.bind(this), 0);
+  this.setColor(options.color);
 
   return this;
 }
 
 Emitter(SimpleColorPicker.prototype);
 
+/* ============================================================================= 
+  Public API
+============================================================================= */
 SimpleColorPicker.prototype.setSize = function(width, height) {
   this.width = width;
   this.height = height;
   this.saturationWidth = this.width - 25;
   this.$el.style.width = this.width + 'px';
   this.$el.style.height = this.height + 'px';
+  return this;
 };
 
 SimpleColorPicker.prototype.setColor = function(color) {
-  this.color = createColor(color);
-  this._hueColor = this.color.clone().saturation(100).lightness(50);
-  if(this.color.saturation() === 0) {
-    this._hueColor.red(255);
+  this.color = new Color(color);
+  this._hueColor = this.color.clone();
+
+  this._hueColor.s = 1;
+  this._hueColor.v = 1;
+  if (this.color.s === 0) {
+    this._hueColor.r = 255;
   }
-  this._moveSelectorTo((this.color.saturationv() / 100) * (this.saturationWidth - 5) + 5, (1 - (this.color.value() / 100)) * (this.height - 2) + 5);
-  this._moveHueTo((1 - (this._hueColor.hue() / 360)) * (this.height - 2) + 4);
+
+  this._moveSelectorTo(this.saturationWidth * this.color.s, (1 - this.color.v) * this.height);
+  this._moveHueTo((1 - (this._hueColor.h / 360)) * this.height);
+  return this;
 };
 
 SimpleColorPicker.prototype.remove = function() {
@@ -88,41 +94,69 @@ SimpleColorPicker.prototype.remove = function() {
   this.$hue.removeEventListener('mousedown', this._onHueMouseDown);
   this._onSaturationMouseUp();
   this._onHueMouseUp();
-  if(this.$el.parentNode) {
+  if (this.$el.parentNode) {
     this.$el.parentNode.removeChild(this.$el);
   }
+  return this;
 };
 
 SimpleColorPicker.prototype.appendTo = function(domElement) {
   domElement.appendChild(this.$el);
-};
-
-SimpleColorPicker.prototype.getHexString = function() {
-  return this.color.hexString();
+  return this;
 };
 
 SimpleColorPicker.prototype.onChange = function(callback) {
   this.on('update', callback);
+  this.emit('update', this.getHexString());
+  return this;
 };
 
 SimpleColorPicker.prototype.close = function() {
   this._onSaturationMouseUp();
   this._onHueMouseUp();
+  return this;
+};
+
+/* ============================================================================= 
+  Color getters
+============================================================================= */
+SimpleColorPicker.prototype.getHexString = function() {
+  return this.color.hex;
+};
+
+SimpleColorPicker.prototype.getHexNumber = function() {
+  return parseInt(this.color.hex.replace('#', ''), 16);
+};
+
+SimpleColorPicker.prototype.getRGB = function() {
+  return this.color.rgb;
+};
+
+SimpleColorPicker.prototype.getHSV = function() {
+  return this.color.hsv;
+};
+
+SimpleColorPicker.prototype.isDark = function() {
+  return this.color.isDark();
+};
+
+SimpleColorPicker.prototype.isLight = function() {
+  return this.color.isLight();
 };
 
 /* ============================================================================= 
   "Private" Methods LOL silly javascript
 ============================================================================= */
 SimpleColorPicker.prototype._moveSelectorTo = function(x, y) {
-  var maxX = this.saturationWidth - 5;
-  var maxY = this.height - 5;
+  var maxX = this.saturationWidth;
+  var maxY = this.height;
 
-  x = clamp(x - 5, 0, maxX);
-  y = clamp(y - 5, 0, maxY);
+  x = clamp(x, 0, maxX);
+  y = clamp(y, 0, maxY);
   
-  this.color.saturationv(100 * x / maxX);
-  this.color.value(100 * (1 - (y / maxY)));
-
+  this.color.s = x / maxX;
+  this.color.v = 1 - (y / maxY);
+  
   this._updateColor();
 
   transform(this.$sbSelector, {
@@ -132,14 +166,14 @@ SimpleColorPicker.prototype._moveSelectorTo = function(x, y) {
 };
 
 SimpleColorPicker.prototype._moveHueTo = function(y) {
-  var maxY = this.height - 2;
+  var maxY = this.height;
   
-  y = clamp(y - 4, 0, maxY);
+  y = clamp(y, 0, maxY);
   
-  var hue = 360 * (1 - (y / maxY));
+  var hue = Math.round(360 * (1 - (y / maxY)));
 
-  this.color.hue(hue);
-  this._hueColor.hue(hue);
+  this.color.h = hue;
+  this._hueColor.h = hue;
   this._updateHue();
 
   transform(this.$hSelector, {
@@ -148,16 +182,15 @@ SimpleColorPicker.prototype._moveHueTo = function(y) {
 };
 
 SimpleColorPicker.prototype._updateHue = function() {
-  this.$saturation.style.background = 'linear-gradient(to right, #fff 0%, ' + this._hueColor.hexString() + ' 100%)';
+  this.$saturation.style.background = 'linear-gradient(to right, #fff 0%, ' + this._hueColor.hex + ' 100%)';
   this._updateColor();
 };
 
 SimpleColorPicker.prototype._updateColor = function() {
-  this.$sbSelector.style.background = this.color.hexString();
-  this.$sbSelector.style.borderColor = this.color.dark() ? '#FFF' : '#000';
+  this.$sbSelector.style.background = this.color.hex;
+  this.$sbSelector.style.borderColor = this.color.isDark() ? '#FFF' : '#000';
   this.emit('update', this.getHexString());
 };
-
 
 /* ============================================================================= 
   Events
