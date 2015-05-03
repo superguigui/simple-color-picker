@@ -255,7 +255,7 @@ SimpleColorPicker.prototype._updateColor = function() {
 };
 
 /* ============================================================================= 
-  Events
+  Events handlers
 ============================================================================= */
 SimpleColorPicker.prototype._onSaturationMouseDown = function(e) {
   this.choosing = true;

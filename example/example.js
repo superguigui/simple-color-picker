@@ -1,7 +1,6 @@
 var domready = require('domready');
 
 var ColorPicker = require('../index.js');
-var Color = require('../src/Color');
 
 domready(function() {
   /* --------------------------
