@@ -36,7 +36,6 @@
 .Scp-hue {
   width: 20px;
   height: 100%;
-  background: #00f;
   position: relative;
   float: left;
   background: linear-gradient(to bottom, #f00 0%, #f0f 17%, #00f 34%, #0ff 50%, #0f0 67%, #ff0 84%, #f00 100%);

@@ -1,28 +1,15 @@
 var test = require('tape');
 var SimpleColorPicker = require('..');
-var createColor = require('../src/utils/createColor');
-var colorTest = require('./color');
 
 /* ======================================================================
-  Utils
+  Sub Tests
 =======================================================================*/
-test('Utils: createColor', function(t) {
-  t.plan(3);
-
-  var color1 = createColor(0x123456);
-  t.equal(color1.hexString(), '#123456', 'hex number as input');
-
-  var color2 = createColor('#A1B2C3');
-  t.equal(color2.hexString(), '#A1B2C3', 'hex string as input');
-
-  var color3 = createColor({r: 104, g: 9, b: 39});
-  t.equal(color3.hexString(), '#680927', '{r: ,g: ,b:} object as input');
-});
+var colorTest = require('./color');
 
 /* ======================================================================
   Create - No options
 =======================================================================*/
-test('No options', function(t) {
+test('SimpleColorPicker: No options', function(t) {
   t.plan(1);
   
   var colorPicker = new SimpleColorPicker();
@@ -33,7 +20,7 @@ test('No options', function(t) {
 /* ======================================================================
   Create - Options
 =======================================================================*/
-test('Options: sizes', function(t) {
+test('SimpleColorPicker: Options sizes', function(t) {
   t.plan(2);
 
   var colorPicker = new SimpleColorPicker({
@@ -45,7 +32,7 @@ test('Options: sizes', function(t) {
   t.equal(colorPicker.height, 210, 'height option');
 });
 
-test('Options: color', function(t) {
+test('SimpleColorPicker: Options color', function(t) {
   t.plan(2);
 
   var colorPickerHexNumber = new SimpleColorPicker({
@@ -61,7 +48,7 @@ test('Options: color', function(t) {
   t.equal(colorPickerHexString.getHexString(), '#0000FF', 'color option hex string');
 });
 
-test('Options: el', function(t) {
+test('SimpleColorPicker: Options el', function(t) {
   t.plan(1);
 
   var div = document.createElement('div');
@@ -72,7 +59,7 @@ test('Options: el', function(t) {
   t.equal(colorPicker.$el.parentNode, div, 'el option parent');
 });
 
-test('Options: background', function(t) {
+test('SimpleColorPicker: Options background', function(t) {
   t.plan(2);
 
   var colorPickerHexNumber = new SimpleColorPicker({
@@ -91,7 +78,7 @@ test('Options: background', function(t) {
 /* ======================================================================
   Methods
 =======================================================================*/
-test('Methods: setSize', function(t) {
+test('SimpleColorPicker: Methods setSize', function(t) {
   t.plan(4);
 
   var colorPicker = new SimpleColorPicker({
@@ -106,7 +93,7 @@ test('Methods: setSize', function(t) {
   t.equal(colorPicker.$el.style.height, '204px', 'height style');
 });
 
-test('Methods: setColor', function(t) {
+test('SimpleColorPicker: Methods setColor', function(t) {
   t.plan(2);
 
   var colorPicker1 = new SimpleColorPicker();

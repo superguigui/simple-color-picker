@@ -16,8 +16,4 @@ domready(function() {
     document.body.style.background = hexStringColor;
     document.querySelector('h1 a').style.color = colorPicker.color.isDark() ? '#FFFFFF' : '#000000';
   });
-
-  var c1 = new Color(0x123456);
-
-  console.log('c1', c1);
 });

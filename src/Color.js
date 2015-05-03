@@ -141,6 +141,7 @@ Color.prototype._updateFromRGB = function() {
   this.hsv = rgb2hsv(this.rgb.r, this.rgb.g, this.rgb.b);
   if(isNaN(this.hsv.h)) {
     this.hsv.h = h;
+    this._updateFromHSV();
   }
 };
 
@@ -150,6 +151,7 @@ Color.prototype._updateFromHex = function() {
   this.hsv = rgb2hsv(this.rgb.r, this.rgb.g, this.rgb.b);
   if(isNaN(this.hsv.h)) {
     this.hsv.h = h;
+    // this._updateFromHSV();
   }
 };
 
