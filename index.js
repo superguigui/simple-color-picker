@@ -2,7 +2,6 @@
 
 var bindAll = require('lodash.bindall');
 var transform = require('dom-transform');
-var Color = require('./src/Color');
 var tinycolor = require('tinycolor2');
 var Emitter = require('component-emitter');
 var isNumber = require('is-number');
