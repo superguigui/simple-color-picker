@@ -1,3 +1,5 @@
+'use strict';
+
 var domready = require('domready');
 
 var ColorPicker = require('../index.js');
