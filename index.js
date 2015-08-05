@@ -300,7 +300,7 @@ SimpleColorPicker.prototype._updateColor = function() {
 SimpleColorPicker.prototype._onSaturationMouseDown = function(e) {
   this.choosing = true;
   var sbOffset = offset(this.$saturation);
-  this._moveSelectorTo(e.clientX - sbOffset.left, e.clientY - sbOffset.top);
+  this._moveSelectorTo(e.clientX - sbOffset.left + document.body.scrollLeft, e.clientY - sbOffset.top + document.body.scrollTop);
   this._updateColorFromPosition();
   window.addEventListener('mouseup', this._onSaturationMouseUp);
   window.addEventListener('mousemove', this._onSaturationMouseMove);
@@ -309,7 +309,7 @@ SimpleColorPicker.prototype._onSaturationMouseDown = function(e) {
 
 SimpleColorPicker.prototype._onSaturationMouseMove = function(e) {
   var sbOffset = offset(this.$saturation);
-  this._moveSelectorTo(e.clientX - sbOffset.left, e.clientY - sbOffset.top);
+  this._moveSelectorTo(e.clientX - sbOffset.left + document.body.scrollLeft, e.clientY - sbOffset.top + document.body.scrollTop);
   this._updateColorFromPosition();
 };
 
@@ -322,7 +322,7 @@ SimpleColorPicker.prototype._onSaturationMouseUp = function() {
 SimpleColorPicker.prototype._onHueMouseDown = function(e) {
   this.choosing = true;
   var hOffset = offset(this.$hue);
-  this._moveHueTo(e.clientY - hOffset.top);
+  this._moveHueTo(e.clientY - hOffset.top + document.body.scrollTop);
   this._updateHueFromPosition();
   window.addEventListener('mouseup', this._onHueMouseUp);
   window.addEventListener('mousemove', this._onHueMouseMove);
@@ -331,7 +331,7 @@ SimpleColorPicker.prototype._onHueMouseDown = function(e) {
 
 SimpleColorPicker.prototype._onHueMouseMove = function(e) {
   var hOffset = offset(this.$hue);
-  this._moveHueTo(e.clientY - hOffset.top);
+  this._moveHueTo(e.clientY - hOffset.top + document.body.scrollTop);
   this._updateHueFromPosition();
 };
 
