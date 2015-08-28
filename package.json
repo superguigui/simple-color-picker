@@ -1,6 +1,6 @@
 {
   "name": "simple-color-picker",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Simple Color picker in common.js.",
   "main": "./index.js",
   "scripts": {
