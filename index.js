@@ -301,8 +301,8 @@ SimpleColorPicker.prototype._updateColor = function() {
 SimpleColorPicker.prototype._onSaturationMouseDown = function(e) {
   this.choosing = true;
   var sbOffset = this.$saturation.getBoundingClientRect();
-  var xPos = (e.type.startsWith('touch')) ? e.touches[0].clientX : e.clientX;
-  var yPos = (e.type.startsWith('touch')) ? e.touches[0].clientY : e.clientY;
+  var xPos = (e.type.indexOf('touch') === 0) ? e.touches[0].clientX : e.clientX;
+  var yPos = (e.type.indexOf('touch') === 0) ? e.touches[0].clientY : e.clientY;
   this._moveSelectorTo(xPos - sbOffset.left, yPos - sbOffset.top);
   this._updateColorFromPosition();
   window.addEventListener('mouseup', this._onSaturationMouseUp);
@@ -314,8 +314,8 @@ SimpleColorPicker.prototype._onSaturationMouseDown = function(e) {
 
 SimpleColorPicker.prototype._onSaturationMouseMove = function(e) {
   var sbOffset = this.$saturation.getBoundingClientRect();
-  var xPos = (e.type.startsWith('touch')) ? e.touches[0].clientX : e.clientX;
-  var yPos = (e.type.startsWith('touch')) ? e.touches[0].clientY : e.clientY;
+  var xPos = (e.type.indexOf('touch') === 0) ? e.touches[0].clientX : e.clientX;
+  var yPos = (e.type.indexOf('touch') === 0) ? e.touches[0].clientY : e.clientY;
   this._moveSelectorTo(xPos - sbOffset.left, yPos - sbOffset.top);
   this._updateColorFromPosition();
 };
@@ -331,7 +331,7 @@ SimpleColorPicker.prototype._onSaturationMouseUp = function() {
 SimpleColorPicker.prototype._onHueMouseDown = function(e) {
   this.choosing = true;
   var hOffset = this.$hue.getBoundingClientRect();
-  var yPos = (e.type.startsWith('touch')) ? e.touches[0].clientY : e.clientY;
+  var yPos = (e.type.indexOf('touch') === 0) ? e.touches[0].clientY : e.clientY;
   this._moveHueTo(yPos - hOffset.top);
   this._updateHueFromPosition();
   window.addEventListener('mouseup', this._onHueMouseUp);
@@ -343,7 +343,7 @@ SimpleColorPicker.prototype._onHueMouseDown = function(e) {
 
 SimpleColorPicker.prototype._onHueMouseMove = function(e) {
   var hOffset = this.$hue.getBoundingClientRect();
-  var yPos = (e.type.startsWith('touch')) ? e.touches[0].clientY : e.clientY;
+  var yPos = (e.type.indexOf('touch') === 0) ? e.touches[0].clientY : e.clientY;
   this._moveHueTo(yPos - hOffset.top);
   this._updateHueFromPosition();
 };
