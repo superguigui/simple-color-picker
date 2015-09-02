@@ -94,7 +94,9 @@ SimpleColorPicker.prototype.appendTo = function(domElement) {
  */
 SimpleColorPicker.prototype.remove = function() {
   this.$saturation.removeEventListener('mousedown', this._onSaturationMouseDown);
+  this.$saturation.removeEventListener('touchstart', this._onSaturationMouseDown);
   this.$hue.removeEventListener('mousedown', this._onHueMouseDown);
+  this.$hue.removeEventListener('touchstart', this._onHueMouseDown);
   this._onSaturationMouseUp();
   this._onHueMouseUp();
   this.off();
