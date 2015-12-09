@@ -3,6 +3,7 @@
   "version": "0.0.9",
   "description": "Simple Color picker in common.js.",
   "main": "./index.js",
+  "typings": "./index.d.ts",
   "scripts": {
     "start": "npm run example & npm run css:watch",
     "example": "budo example/example.js:example/example-build.js --live | garnish",
