@@ -1,4 +1,4 @@
-interface ColorPickerOptions {
+export interface ColorPickerOptions {
     color?: string | number;
     background?: string | number;
     el?: HTMLElement;
@@ -6,7 +6,7 @@ interface ColorPickerOptions {
     height?: number;
 }
 
-interface ColorPicker {
+export interface ColorPicker {
     new (options?: ColorPickerOptions): ColorPicker;
 
     appendTo(domElement: HTMLElement): void;
@@ -38,8 +38,6 @@ interface ColorPicker {
     isLight(): boolean;
 }
 
-declare var ColorPicker: ColorPicker;
+export var ColorPicker: ColorPicker;
 
-declare module "simple-color-picker" {
-    export = ColorPicker;
-}
+export default ColorPicker;
