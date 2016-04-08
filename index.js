@@ -1,10 +1,10 @@
 'use strict';
 
 var bindAll = require('lodash.bindall');
-var transform = require('dom-transform');
-var tinycolor = require('tinycolor2');
 var Emitter = require('component-emitter');
 var isNumber = require('is-number');
+var tinycolor = require('tinycolor2');
+var transform = require('dom-transform');
 var clamp = require('./src/utils/maths/clamp');
 
 /**
@@ -261,7 +261,6 @@ SimpleColorPicker.prototype._moveSelectorTo = function(x, y) {
     x: this.position.x,
     y: this.position.y
   });
-
 };
 
 SimpleColorPicker.prototype._updateColorFromPosition = function() {
@@ -275,7 +274,6 @@ SimpleColorPicker.prototype._moveHueTo = function(y) {
   transform(this.$hSelector, {
     y: this.huePosition
   });
-
 };
 
 SimpleColorPicker.prototype._updateHueFromPosition = function() {
@@ -287,13 +285,13 @@ SimpleColorPicker.prototype._updateHueFromPosition = function() {
 
 SimpleColorPicker.prototype._updateHue = function() {
   var hueColor = tinycolor({h: this.hue, s: 1, v: 1});
-  this.$saturation.style.background = 'linear-gradient(to right, #fff 0%, ' + hueColor.toHexString() + ' 100%)';
+  this.$saturation.style.background = 'linear-gradient(to right, #fff, ' + hueColor.toHexString() + ')';
   this._updateColor();
 };
 
 SimpleColorPicker.prototype._updateColor = function() {
   this.$sbSelector.style.background = this.color.toHexString();
-  this.$sbSelector.style.borderColor = this.color.isDark() ? '#FFF' : '#000';
+  this.$sbSelector.style.borderColor = this.color.isDark() ? '#fff' : '#000';
   this.emit('update', this.color.toHexString());
 };
 
