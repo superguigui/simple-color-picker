@@ -1,6 +1,6 @@
 {
   "name": "simple-color-picker",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "Simple Color picker in common.js.",
   "author": "Guillaume Gouessan <guillaume.gouessan@gmail.com>",
   "license": "MIT",
