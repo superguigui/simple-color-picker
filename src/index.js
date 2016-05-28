@@ -1,6 +1,5 @@
 'use strict';
 
-var bindAll = require('lodash.bindall');
 var Emitter = require('component-emitter');
 var isNumber = require('is-number');
 var tinycolor = require('tinycolor2');
@@ -17,10 +16,10 @@ var clamp = require('./utils/maths/clamp');
  * @param {Number} options.height Desired height of the color picker. Default is 150.
  */
 function SimpleColorPicker(options) {
-  // options
+  // Options
   options = options || {};
 
-  // properties
+  // Properties
   this.color = null;
   this.width = 0;
   this.widthUnits = 'px';
@@ -34,10 +33,15 @@ function SimpleColorPicker(options) {
   this.maxHue = 0;
   this.inputIsNumber = false;
 
-  // bind methods to scope (only if needed)
-  bindAll(this, '_onSaturationMouseMove', '_onSaturationMouseDown', '_onSaturationMouseUp', '_onHueMouseDown', '_onHueMouseUp', '_onHueMouseMove');
+  // Bind methods to scope (if needed)
+  this._onSaturationMouseMove = this._onSaturationMouseMove.bind(this);
+  this._onSaturationMouseDown = this._onSaturationMouseDown.bind(this);
+  this._onSaturationMouseUp = this._onSaturationMouseUp.bind(this);
+  this._onHueMouseDown  = this._onHueMouseDown .bind(this);
+  this._onHueMouseUp = this._onHueMouseUp.bind(this);
+  this._onHueMouseMove = this._onHueMouseMove.bind(this);
 
-  // create dom
+  // Create DOM
   this.$el = document.createElement('div');
   this.$el.className = 'Scp';
   this.$el.innerHTML = [
@@ -50,19 +54,19 @@ function SimpleColorPicker(options) {
     '</div>'
   ].join('\n');
 
-  // dom accessors
+  // DOM accessors
   this.$saturation = this.$el.querySelector('.Scp-saturation');
   this.$hue = this.$el.querySelector('.Scp-hue');
   this.$sbSelector = this.$el.querySelector('.Scp-sbSelector');
   this.$hSelector = this.$el.querySelector('.Scp-hSelector');
 
-  // event listeners
+  // Event listeners
   this.$saturation.addEventListener('mousedown', this._onSaturationMouseDown);
   this.$saturation.addEventListener('touchstart', this._onSaturationMouseDown);
   this.$hue.addEventListener('mousedown', this._onHueMouseDown);
   this.$hue.addEventListener('touchstart', this._onHueMouseDown);
 
-  // some styling and DOMing from options
+  // Some styling and DOMing from options
   if (options.el) {
     this.appendTo(options.el);
   }
