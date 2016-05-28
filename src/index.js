@@ -37,7 +37,7 @@ function SimpleColorPicker(options) {
   this._onSaturationMouseMove = this._onSaturationMouseMove.bind(this);
   this._onSaturationMouseDown = this._onSaturationMouseDown.bind(this);
   this._onSaturationMouseUp = this._onSaturationMouseUp.bind(this);
-  this._onHueMouseDown  = this._onHueMouseDown .bind(this);
+  this._onHueMouseDown  = this._onHueMouseDown.bind(this);
   this._onHueMouseUp = this._onHueMouseUp.bind(this);
   this._onHueMouseMove = this._onHueMouseMove.bind(this);
 
@@ -263,7 +263,7 @@ SimpleColorPicker.prototype.isLight = function() {
 };
 
 /* =============================================================================
-  "Private" Methods LOL silly javascript
+  "Private" methods
 ============================================================================= */
 SimpleColorPicker.prototype._moveSelectorTo = function(x, y) {
   this.position.x = clamp(x, 0, this.saturationWidth);
