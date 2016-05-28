@@ -23,7 +23,9 @@ function SimpleColorPicker(options) {
   // properties
   this.color = null;
   this.width = 0;
+  this.widthUnits = 'px';
   this.height = 0;
+  this.heightUnits = 'px';
   this.hue = 0;
   this.choosing = false;
   this.position = {x: 0, y: 0};
@@ -66,6 +68,12 @@ function SimpleColorPicker(options) {
   }
   if (options.background) {
     this.setBackgroundColor(options.background);
+  }
+  if (options.widthUnits) {
+    this.widthUnits = options.widthUnits;
+  }
+  if (options.heightUnits) {
+    this.heightUnits = options.heightUnits;
   }
   this.setSize(options.width || 175, options.height || 150);
   this.setColor(options.color);
@@ -144,8 +152,8 @@ SimpleColorPicker.prototype.setColor = function(color) {
 SimpleColorPicker.prototype.setSize = function(width, height) {
   this.width = width;
   this.height = height;
-  this.$el.style.width = this.width + 'px';
-  this.$el.style.height = this.height + 'px';
+  this.$el.style.width = this.width + this.widthUnits;
+  this.$el.style.height = this.height + this.heightUnits;
   this.saturationWidth = this.width - 25;
   this.maxHue = this.height - 2;
   return this;

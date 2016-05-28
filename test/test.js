@@ -35,6 +35,22 @@ test('SimpleColorPicker: Options sizes', function(t) {
   t.equal(colorPicker.$el.style.height, '210px', 'height option style');
 });
 
+test('SimpleColorPicker: Options units', function(t) {
+  t.plan(4);
+
+  var colorPicker = new SimpleColorPicker({
+    width: 30,
+    widthUnits: 'vw',
+    height: 10,
+    heightUnits: 'vh'
+  });
+
+  t.equal(colorPicker.width, 30, 'width option');
+  t.equal(colorPicker.height, 10, 'height option');
+  t.equal(colorPicker.$el.style.width, '30vw', 'width option style');
+  t.equal(colorPicker.$el.style.height, '10vh', 'height option style');
+});
+
 test('SimpleColorPicker: Options color', function(t) {
   t.plan(2);
 
