@@ -1,6 +1,6 @@
 'use strict';
 
-var ColorPicker = require('../index.js');
+var ColorPicker = require('../src/index.js');
 
 /* --------------------------
   ColorPicker

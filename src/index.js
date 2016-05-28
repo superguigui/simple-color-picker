@@ -5,7 +5,7 @@ var Emitter = require('component-emitter');
 var isNumber = require('is-number');
 var tinycolor = require('tinycolor2');
 var transform = require('dom-transform');
-var clamp = require('./src/utils/maths/clamp');
+var clamp = require('./utils/maths/clamp');
 
 /**
  * Creates a new Colorpicker
