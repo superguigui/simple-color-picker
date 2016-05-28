@@ -34,12 +34,12 @@ function SimpleColorPicker(options) {
   this.inputIsNumber = false;
 
   // Bind methods to scope (if needed)
-  this._onSaturationMouseMove = this._onSaturationMouseMove.bind(this);
   this._onSaturationMouseDown = this._onSaturationMouseDown.bind(this);
+  this._onSaturationMouseMove = this._onSaturationMouseMove.bind(this);
   this._onSaturationMouseUp = this._onSaturationMouseUp.bind(this);
-  this._onHueMouseDown  = this._onHueMouseDown.bind(this);
-  this._onHueMouseUp = this._onHueMouseUp.bind(this);
+  this._onHueMouseDown = this._onHueMouseDown.bind(this);
   this._onHueMouseMove = this._onHueMouseMove.bind(this);
+  this._onHueMouseUp = this._onHueMouseUp.bind(this);
 
   // Create DOM
   this.$el = document.createElement('div');
@@ -52,7 +52,7 @@ function SimpleColorPicker(options) {
     '<div class="Scp-hue">',
       '<div class="Scp-hSelector"></div>',
     '</div>'
-  ].join('\n');
+  ].join('');
 
   // DOM accessors
   this.$saturation = this.$el.querySelector('.Scp-saturation');
