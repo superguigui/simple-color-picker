@@ -1,17 +1,18 @@
 'use strict';
 
+(function() {
+
 var Emitter = require('component-emitter');
 var isNumber = require('is-number');
 var tinycolor = require('tinycolor2');
 var transform = require('dom-transform');
-var clamp = require('./utils/maths/clamp');
 
 /**
- * Creates a new Colorpicker
+ * Creates a new SimpleColorPicker
  * @param {Object} options
- * @param {String|Number|Object} options.color The default color that the colorpicker will display. Default is #FFFFFF. It can be a hexadecimal number or an hex String.
- * @param {String|Number|Object} options.background The background color of the colorpicker. Default is transparent. It can be a hexadecimal number or an hex String.
- * @param {DomElement} options.el A dom node to add the colorpicker to. You can also use `colorPicker.appendTo(domNode)` afterwards if you prefer.
+ * @param {String|Number|Object} options.color The default color that the picker will display. Default is #FFFFFF. It can be a hexadecimal number or an hex String.
+ * @param {String|Number|Object} options.background The background color of the picker. Default is transparent. It can be a hexadecimal number or an hex String.
+ * @param {HTMLElement} options.el A dom node to add the picker to. You can also use `colorPicker.appendTo(domNode)` afterwards if you prefer.
  * @param {Number} options.width Desired width of the color picker. Default is 175.
  * @param {Number} options.height Desired height of the color picker. Default is 150.
  */
@@ -91,44 +92,47 @@ Emitter(SimpleColorPicker.prototype);
   Public API
 ============================================================================= */
 /**
- * Add the colorPicker instance to a domElement.
- * @param  {domElement} domElement
- * @return {colorPicker} returns itself for chaining purpose
+ * Add the SimpleColorPicker instance to a DOM element.
+ * @param  {HTMLElement} el
+ * @return {SimpleColorPicker} Returns itself for chaining purpose
  */
-SimpleColorPicker.prototype.appendTo = function(domElement) {
-  domElement.appendChild(this.$el);
+SimpleColorPicker.prototype.appendTo = function(el) {
+  el.appendChild(this.$el);
   return this;
 };
 
 /**
- * Removes colorpicker from is parent and kill all listeners.
+ * Removes picker from its parent and kill all listeners.
  * Call this method for proper destroy.
  */
 SimpleColorPicker.prototype.remove = function() {
+  this._onSaturationMouseUp();
+  this._onHueMouseUp();
+
   this.$saturation.removeEventListener('mousedown', this._onSaturationMouseDown);
   this.$saturation.removeEventListener('touchstart', this._onSaturationMouseDown);
   this.$hue.removeEventListener('mousedown', this._onHueMouseDown);
   this.$hue.removeEventListener('touchstart', this._onHueMouseDown);
-  this._onSaturationMouseUp();
-  this._onHueMouseUp();
+
   this.off();
+
   if (this.$el.parentNode) {
     this.$el.parentNode.removeChild(this.$el);
   }
 };
 
 /**
- * Manually set the current color of the colorpicker. This is the method
+ * Manually set the current color of the picker. This is the method
  * used on instantiation to convert `color` option to actual color for
- * the colorpicker. Param can be a hexadecimal number or an hex String.
+ * the picker. Param can be a hexadecimal number or an hex String.
  * @param {String|Number} color hex color desired
+ * @return {SimpleColorPicker} Returns itself for chaining purpose
  */
 SimpleColorPicker.prototype.setColor = function(color) {
   if(isNumber(color)) {
     this.inputIsNumber = true;
-    color = '#' + ('00000' + (color | 0).toString(16)).substr(-6);
-  }
-  else {
+    color = numberToHex(color);
+  } else {
     this.inputIsNumber = false;
   }
   this.color = tinycolor(color);
@@ -152,6 +156,7 @@ SimpleColorPicker.prototype.setColor = function(color) {
  * of the constructor.
  * @param {Number} width
  * @param {Number} height
+ * @return {SimpleColorPicker} Returns itself for chaining purpose
  */
 SimpleColorPicker.prototype.setSize = function(width, height) {
   this.width = width;
@@ -164,20 +169,22 @@ SimpleColorPicker.prototype.setSize = function(width, height) {
 };
 
 /**
- * Set the background color of the colorpicker. It also adds a 5px padding
+ * Set the background color of the picker. It also adds a 5px padding
  * for design purpose.
  * @param {String|Number} color hex color desired for background
+ * @return {SimpleColorPicker} Returns itself for chaining purpose
  */
 SimpleColorPicker.prototype.setBackgroundColor = function(color) {
   if(isNumber(color)) {
-    color = '#' + ('00000' + (color | 0).toString(16)).substr(-6);
+    color = numberToHex(color);
   }
   this.$el.style.padding = '5px';
   this.$el.style.background = tinycolor(color).toHexString();
+  return this;
 };
 
 /**
- * Removes background of the colorpicker if previously set. It's no use
+ * Removes background of the picker if previously set. It's no use
  * calling this method if you didn't set the background option on start
  * or if you didn't call setBackgroundColor previously.
  */
@@ -187,11 +194,11 @@ SimpleColorPicker.prototype.setNoBackground = function() {
 };
 
 /**
- * Registers callback to the update event of the colorpicker.
- * ColorPicker inherits from [component/emitter](https://github.com/component/emitter)
+ * Registers callback to the update event of the picker.
+ * picker inherits from [component/emitter](https://github.com/component/emitter)
  * so you could do the same thing by calling `colorPicker.on('update');`
  * @param  {Function} callback
- * @return {colorPicker} returns itself for chaining purpose
+ * @return {SimpleColorPicker} Returns itself for chaining purpose
  */
 SimpleColorPicker.prototype.onChange = function(callback) {
   this.on('update', callback);
@@ -313,8 +320,8 @@ SimpleColorPicker.prototype._updateColor = function() {
 SimpleColorPicker.prototype._onSaturationMouseDown = function(e) {
   this.choosing = true;
   var sbOffset = this.$saturation.getBoundingClientRect();
-  var xPos = (e.type.indexOf('touch') === 0) ? e.touches[0].clientX : e.clientX;
-  var yPos = (e.type.indexOf('touch') === 0) ? e.touches[0].clientY : e.clientY;
+  var xPos = getMousePosition(e).x;
+  var yPos = getMousePosition(e).y;
   this._moveSelectorTo(xPos - sbOffset.left, yPos - sbOffset.top);
   this._updateColorFromPosition();
   window.addEventListener('mouseup', this._onSaturationMouseUp);
@@ -326,8 +333,8 @@ SimpleColorPicker.prototype._onSaturationMouseDown = function(e) {
 
 SimpleColorPicker.prototype._onSaturationMouseMove = function(e) {
   var sbOffset = this.$saturation.getBoundingClientRect();
-  var xPos = (e.type.indexOf('touch') === 0) ? e.touches[0].clientX : e.clientX;
-  var yPos = (e.type.indexOf('touch') === 0) ? e.touches[0].clientY : e.clientY;
+  var xPos = getMousePosition(e).x;
+  var yPos = getMousePosition(e).y;
   this._moveSelectorTo(xPos - sbOffset.left, yPos - sbOffset.top);
   this._updateColorFromPosition();
 };
@@ -343,7 +350,7 @@ SimpleColorPicker.prototype._onSaturationMouseUp = function() {
 SimpleColorPicker.prototype._onHueMouseDown = function(e) {
   this.choosing = true;
   var hOffset = this.$hue.getBoundingClientRect();
-  var yPos = (e.type.indexOf('touch') === 0) ? e.touches[0].clientY : e.clientY;
+  var yPos = getMousePosition(e).y;
   this._moveHueTo(yPos - hOffset.top);
   this._updateHueFromPosition();
   window.addEventListener('mouseup', this._onHueMouseUp);
@@ -355,7 +362,7 @@ SimpleColorPicker.prototype._onHueMouseDown = function(e) {
 
 SimpleColorPicker.prototype._onHueMouseMove = function(e) {
   var hOffset = this.$hue.getBoundingClientRect();
-  var yPos = (e.type.indexOf('touch') === 0) ? e.touches[0].clientY : e.clientY;
+  var yPos = getMousePosition(e).y;
   this._moveHueTo(yPos - hOffset.top);
   this._updateHueFromPosition();
 };
@@ -368,4 +375,27 @@ SimpleColorPicker.prototype._onHueMouseUp = function() {
   window.removeEventListener('touchmove', this._onHueMouseMove);
 };
 
-module.exports = SimpleColorPicker;
+/* =============================================================================
+  Helper functions
+============================================================================= */
+function clamp(value, min, max) {
+  return Math.min(Math.max(value, min), max);
+}
+
+function getMousePosition(e) {
+  e = (e.type.indexOf('touch') === 0) ? e.touches[0] : e;
+  return {
+    x: e.clientX,
+    y: e.clientY
+  };
+}
+
+function numberToHex(color) {
+  return color = '#' + ('00000' + (color | 0).toString(16)).substr(-6);
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = SimpleColorPicker;
+}
+
+})();

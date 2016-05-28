@@ -34,7 +34,6 @@
   "devDependencies": {
     "autoprefixer-stylus": "^0.9.3",
     "browserify": "^13.0.1",
-    "browserify-css": "^0.9.1",
     "budo": "^8.2.2",
     "faucet": "0.0.1",
     "garnish": "^5.2.0",
