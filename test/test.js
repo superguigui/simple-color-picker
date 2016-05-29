@@ -1,7 +1,7 @@
 'use strict';
 
 var test = require('tape');
-var SimpleColorPicker = require('..');
+var SimpleColorPicker = require('../src');
 
 /* ======================================================================
   Sub Tests

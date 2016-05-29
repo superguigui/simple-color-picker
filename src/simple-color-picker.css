@@ -23,8 +23,7 @@
   background: linear-gradient(rgba(255,255,255,0), #000);
 }
 .Scp-sbSelector {
-  border: 2px solid;
-  border-color: #fff;
+  border: 2px solid #fff;
   position: absolute;
   width: 14px;
   height: 14px;
