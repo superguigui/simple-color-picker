@@ -31,6 +31,7 @@ function SimpleColorPicker(options) {
   this.position = {x: 0, y: 0};
   this.huePosition = 0;
   this.saturationWidth = 0;
+  this.hueHeight = 0;
   this.maxHue = 0;
   this.inputIsNumber = false;
 
@@ -143,8 +144,8 @@ SimpleColorPicker.prototype.setColor = function(color) {
     this.hue = hsvColor.h;
   }
 
-  this._moveSelectorTo(this.saturationWidth * hsvColor.s, (1 - hsvColor.v) * this.height);
-  this._moveHueTo((1 - (this.hue / 360)) * this.height);
+  this._moveSelectorTo(this.saturationWidth * hsvColor.s, (1 - hsvColor.v) * this.hueHeight);
+  this._moveHueTo((1 - (this.hue / 360)) * this.hueHeight);
 
   this._updateHue();
   return this;
@@ -163,8 +164,9 @@ SimpleColorPicker.prototype.setSize = function(width, height) {
   this.height = height;
   this.$el.style.width = this.width + this.widthUnits;
   this.$el.style.height = this.height + this.heightUnits;
-  this.saturationWidth = this.width - 25;
-  this.maxHue = this.height - 2;
+  this.saturationWidth = this.$saturation.clientWidth;
+  this.hueHeight = this.$hue.clientHeight;
+  this.maxHue = this.hueHeight - 2;
   return this;
 };
 
@@ -274,7 +276,7 @@ SimpleColorPicker.prototype.isLight = function() {
 ============================================================================= */
 SimpleColorPicker.prototype._moveSelectorTo = function(x, y) {
   this.position.x = clamp(x, 0, this.saturationWidth);
-  this.position.y = clamp(y, 0, this.height);
+  this.position.y = clamp(y, 0, this.hueHeight);
 
   transform(this.$sbSelector, {
     x: this.position.x,
@@ -283,7 +285,7 @@ SimpleColorPicker.prototype._moveSelectorTo = function(x, y) {
 };
 
 SimpleColorPicker.prototype._updateColorFromPosition = function() {
-  this.color = tinycolor({h: this.hue, s: this.position.x / this.saturationWidth, v: 1 - (this.position.y / this.height)});
+  this.color = tinycolor({h: this.hue, s: this.position.x / this.saturationWidth, v: 1 - (this.position.y / this.hueHeight)});
   this._updateColor();
 };
 
