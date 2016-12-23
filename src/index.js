@@ -27,7 +27,6 @@ function SimpleColorPicker(options) {
   this.height = 0;
   this.heightUnits = 'px';
   this.hue = 0;
-  this.choosing = false;
   this.position = {x: 0, y: 0};
   this.huePosition = 0;
   this.saturationWidth = 0;
@@ -164,9 +163,13 @@ SimpleColorPicker.prototype.setSize = function(width, height) {
   this.height = height;
   this.$el.style.width = this.width + this.widthUnits;
   this.$el.style.height = this.height + this.heightUnits;
-  this.saturationWidth = this.$saturation.clientWidth;
-  this.hueHeight = this.$hue.clientHeight;
+
+  this.saturationWidth = this.width - 25;
+  this.$saturation.style.width = this.saturationWidth + 'px';
+
+  this.hueHeight = this.height;
   this.maxHue = this.hueHeight - 2;
+
   return this;
 };
 
@@ -320,7 +323,6 @@ SimpleColorPicker.prototype._updateColor = function() {
   Events handlers
 ============================================================================= */
 SimpleColorPicker.prototype._onSaturationMouseDown = function(e) {
-  this.choosing = true;
   var sbOffset = this.$saturation.getBoundingClientRect();
   var xPos = getMousePosition(e).x;
   var yPos = getMousePosition(e).y;
@@ -342,7 +344,6 @@ SimpleColorPicker.prototype._onSaturationMouseMove = function(e) {
 };
 
 SimpleColorPicker.prototype._onSaturationMouseUp = function() {
-  this.choosing = false;
   window.removeEventListener('mouseup', this._onSaturationMouseUp);
   window.removeEventListener('touchend', this._onSaturationMouseUp);
   window.removeEventListener('mousemove', this._onSaturationMouseMove);
@@ -350,7 +351,6 @@ SimpleColorPicker.prototype._onSaturationMouseUp = function() {
 };
 
 SimpleColorPicker.prototype._onHueMouseDown = function(e) {
-  this.choosing = true;
   var hOffset = this.$hue.getBoundingClientRect();
   var yPos = getMousePosition(e).y;
   this._moveHueTo(yPos - hOffset.top);
@@ -370,7 +370,6 @@ SimpleColorPicker.prototype._onHueMouseMove = function(e) {
 };
 
 SimpleColorPicker.prototype._onHueMouseUp = function() {
-  this.choosing = false;
   window.removeEventListener('mouseup', this._onHueMouseUp);
   window.removeEventListener('touchend', this._onHueMouseUp);
   window.removeEventListener('mousemove', this._onHueMouseMove);

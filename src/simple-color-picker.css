@@ -1,6 +1,4 @@
 .Scp {
-  width: 175px;
-  height: 150px;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -9,7 +7,6 @@
 }
 .Scp-saturation {
   position: relative;
-  width: calc(100% - 25px);
   height: 100%;
   background: -webkit-linear-gradient(left, #fff, #f00);
   background: linear-gradient(to right, #fff, #f00);
