@@ -164,9 +164,13 @@ SimpleColorPicker.prototype.setSize = function(width, height) {
   this.height = height;
   this.$el.style.width = this.width + this.widthUnits;
   this.$el.style.height = this.height + this.heightUnits;
-  this.saturationWidth = this.$saturation.clientWidth;
-  this.hueHeight = this.$hue.clientHeight;
+
+  this.saturationWidth = this.width - 25;
+  this.$saturation.style.width = this.saturationWidth + 'px';
+
+  this.hueHeight = this.height;
   this.maxHue = this.hueHeight - 2;
+
   return this;
 };
 
