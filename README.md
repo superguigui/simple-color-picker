@@ -33,11 +33,12 @@ var colorPicker = new ColorPicker({
   background: '#454545',
   el: document.body,
   width: 200,
-  height: 200
+  height: 200,
+  window: document.getElementsByTagName('iframe')[0].contentWindow
 });
 ```
 
-None of these options are mendatory.
+None of these options are mandatory.
 
 ### `color`
 The default color that the colorpicker will display. Default is #FFFFFF. It can be a hexadecimal number or an hex String.
@@ -53,6 +54,9 @@ Desired width of the color picker. Default is 175.
 
 ### `height`
 Desired height of the color picker. Default is 150.
+
+### `window`
+Reference to a window object. This will allow Simple Color Picker to apply event listeners in the correct context in the event that you are using it inside of an iFrame from a script that resides outside of it.
 
 ## Methods
 
