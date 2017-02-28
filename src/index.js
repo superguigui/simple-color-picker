@@ -42,8 +42,12 @@ function SimpleColorPicker(options) {
   this._onHueMouseMove = this._onHueMouseMove.bind(this);
   this._onHueMouseUp = this._onHueMouseUp.bind(this);
 
+  // Register window and document references in case this is instantiated inside of an iframe
+  this.window = options.window || window;
+  this.document = this.window.document
+
   // Create DOM
-  this.$el = document.createElement('div');
+  this.$el = this.document.createElement('div');
   this.$el.className = 'Scp';
   this.$el.innerHTML = [
     '<div class="Scp-saturation">',
@@ -328,10 +332,10 @@ SimpleColorPicker.prototype._onSaturationMouseDown = function(e) {
   var yPos = getMousePosition(e).y;
   this._moveSelectorTo(xPos - sbOffset.left, yPos - sbOffset.top);
   this._updateColorFromPosition();
-  window.addEventListener('mouseup', this._onSaturationMouseUp);
-  window.addEventListener('touchend', this._onSaturationMouseUp);
-  window.addEventListener('mousemove', this._onSaturationMouseMove);
-  window.addEventListener('touchmove', this._onSaturationMouseMove);
+  this.window.addEventListener('mouseup', this._onSaturationMouseUp);
+  this.window.addEventListener('touchend', this._onSaturationMouseUp);
+  this.window.addEventListener('mousemove', this._onSaturationMouseMove);
+  this.window.addEventListener('touchmove', this._onSaturationMouseMove);
   e.preventDefault();
 };
 
@@ -344,10 +348,10 @@ SimpleColorPicker.prototype._onSaturationMouseMove = function(e) {
 };
 
 SimpleColorPicker.prototype._onSaturationMouseUp = function() {
-  window.removeEventListener('mouseup', this._onSaturationMouseUp);
-  window.removeEventListener('touchend', this._onSaturationMouseUp);
-  window.removeEventListener('mousemove', this._onSaturationMouseMove);
-  window.removeEventListener('touchmove', this._onSaturationMouseMove);
+  this.window.removeEventListener('mouseup', this._onSaturationMouseUp);
+  this.window.removeEventListener('touchend', this._onSaturationMouseUp);
+  this.window.removeEventListener('mousemove', this._onSaturationMouseMove);
+  this.window.removeEventListener('touchmove', this._onSaturationMouseMove);
 };
 
 SimpleColorPicker.prototype._onHueMouseDown = function(e) {
@@ -355,10 +359,10 @@ SimpleColorPicker.prototype._onHueMouseDown = function(e) {
   var yPos = getMousePosition(e).y;
   this._moveHueTo(yPos - hOffset.top);
   this._updateHueFromPosition();
-  window.addEventListener('mouseup', this._onHueMouseUp);
-  window.addEventListener('touchend', this._onHueMouseUp);
-  window.addEventListener('mousemove', this._onHueMouseMove);
-  window.addEventListener('touchmove', this._onHueMouseMove);
+  this.window.addEventListener('mouseup', this._onHueMouseUp);
+  this.window.addEventListener('touchend', this._onHueMouseUp);
+  this.window.addEventListener('mousemove', this._onHueMouseMove);
+  this.window.addEventListener('touchmove', this._onHueMouseMove);
   e.preventDefault();
 };
 
@@ -370,10 +374,10 @@ SimpleColorPicker.prototype._onHueMouseMove = function(e) {
 };
 
 SimpleColorPicker.prototype._onHueMouseUp = function() {
-  window.removeEventListener('mouseup', this._onHueMouseUp);
-  window.removeEventListener('touchend', this._onHueMouseUp);
-  window.removeEventListener('mousemove', this._onHueMouseMove);
-  window.removeEventListener('touchmove', this._onHueMouseMove);
+  this.window.removeEventListener('mouseup', this._onHueMouseUp);
+  this.window.removeEventListener('touchend', this._onHueMouseUp);
+  this.window.removeEventListener('mousemove', this._onHueMouseMove);
+  this.window.removeEventListener('touchmove', this._onHueMouseMove);
 };
 
 /* =============================================================================
