@@ -101,7 +101,11 @@ Emitter(SimpleColorPicker.prototype);
  * @return {SimpleColorPicker} Returns itself for chaining purpose
  */
 SimpleColorPicker.prototype.appendTo = function(el) {
-  el.appendChild(this.$el);
+  if (typeof el === 'string') {
+    document.querySelector(el).appendChild(this.$el);
+  } else {
+    el.appendChild(this.$el);
+  }
   return this;
 };
 
