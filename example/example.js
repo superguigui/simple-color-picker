@@ -8,7 +8,8 @@ var ColorPicker = require('../src/index.js');
 var colorPicker = new ColorPicker({
   el: document.body,
   color: '#123456',
-  background: '#656565'
+  background: '#656565',
+  width: 300
 });
 
 colorPicker.onChange(function(hexStringColor) {
