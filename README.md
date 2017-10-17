@@ -47,7 +47,7 @@ The default color that the colorpicker will display. Default is #FFFFFF. It can 
 The background color of the colorpicker. Default is transparent. It can be a hexadecimal number or an hex String.
 
 ### `el`
-A dom node to add the colorpicker to. You can also use `colorPicker.appendTo(domNode)` afterwards if you prefer.
+A dom node or CSS selector(querySelector) to add the colorpicker to. You can also use `colorPicker.appendTo(domNode | '#id')` afterwards if you prefer.
 
 ### `width`
 Desired width of the color picker. Default is 175.
@@ -60,7 +60,7 @@ Reference to a window object. This will allow Simple Color Picker to apply event
 
 ## Methods
 
-### `.appendTo(domElement)`
+### `.appendTo(domElement | CSS selector)`
 Add the colorPicker instance to a domElement.
 
 ### `.remove()`
