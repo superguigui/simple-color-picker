@@ -2,9 +2,6 @@
 
 var ColorPicker = require('../src/index.js');
 
-/* --------------------------
-  ColorPicker
-*/
 var colorPicker = new ColorPicker({
   el: document.body,
   color: '#123456',
