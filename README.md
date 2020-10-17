@@ -1,8 +1,6 @@
-[![unstable](http://badges.github.io/stability-badges/dist/unstable.svg)](http://github.com/badges/stability-badges)
-
 # simple-color-picker
 
-Simple Color picker in common.js.
+Simple Color picker.
 
 [demo](http://superguigui.github.io/simple-color-picker)
 
@@ -94,7 +92,7 @@ Returns color as number (ex: 0xFF0000).
 Returns color as {r: 255, g: 0, b: 0} object.
 
 ### `.getHSV()`
-Returns color as {h: 100, s: 1, v: 1} object.
+Returns color as {h: 1, s: 1, v: 1} object.
 
 ### `.isDark()`
 Returns true if color is perceived as dark.
