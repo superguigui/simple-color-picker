@@ -20,6 +20,7 @@ export declare class ColorPicker {
     private _maxHue;
     _inputIsNumber: boolean;
     private _saturationWidth;
+    private _isChoosing;
     private _callbacks;
     width: number;
     height: number;
@@ -83,6 +84,10 @@ export declare class ColorPicker {
      * @return {ColorPicker} Returns itself for chaining purpose
      */
     onChange(callback: Function): ColorPicker;
+    /**
+     * Is true when mouse is down and user is currently choosing a color.
+     */
+    get isChoosing(): boolean;
     /**
      * Main color getter, will return a formatted color string depending on input
      * or a number depending on the last setColor call.

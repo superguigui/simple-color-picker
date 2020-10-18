@@ -23,6 +23,7 @@ export class ColorPicker {
   private _maxHue: number = 0
   public _inputIsNumber: boolean = false
   private _saturationWidth: number = 0
+  private _isChoosing: boolean = false
   private _callbacks: Function[] = []
 
   public width: number = 0
@@ -218,6 +219,13 @@ export class ColorPicker {
     return this
   }
 
+  /**
+   * Is true when mouse is down and user is currently choosing a color.
+   */
+  public get isChoosing(): boolean {
+    return this._isChoosing
+  }
+
   /* =============================================================================
     Color getters
   ============================================================================= */
@@ -334,6 +342,7 @@ export class ColorPicker {
   private _onSaturationMouseDown = (e: MouseEvent | TouchEvent): void => {
     const sbOffset = this.$saturation.getBoundingClientRect()
     const { x, y } = getMousePosition(e)
+    this._isChoosing = true
     this._moveSelectorTo(x - sbOffset.left, y - sbOffset.top)
     this._updateColorFromPosition()
     this._window.addEventListener('mouseup', this._onSaturationMouseUp)
@@ -351,6 +360,7 @@ export class ColorPicker {
   }
 
   private _onSaturationMouseUp = () => {
+    this._isChoosing = false
     this._window.removeEventListener('mouseup', this._onSaturationMouseUp)
     this._window.removeEventListener('touchend', this._onSaturationMouseUp)
     this._window.removeEventListener('mousemove', this._onSaturationMouseMove)
@@ -360,6 +370,7 @@ export class ColorPicker {
   private _onHueMouseDown = (e: MouseEvent | TouchEvent): void => {
     const hOffset = this.$hue.getBoundingClientRect()
     const { y } = getMousePosition(e)
+    this._isChoosing = true
     this._moveHueTo(y - hOffset.top)
     this._updateHueFromPosition()
     this._window.addEventListener('mouseup', this._onHueMouseUp)
@@ -377,6 +388,7 @@ export class ColorPicker {
   }
 
   private _onHueMouseUp = () => {
+    this._isChoosing = false
     this._window.removeEventListener('mouseup', this._onHueMouseUp)
     this._window.removeEventListener('touchend', this._onHueMouseUp)
     this._window.removeEventListener('mousemove', this._onHueMouseMove)

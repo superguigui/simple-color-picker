@@ -63,6 +63,11 @@ Desired height of the color picker. Default is 150.
 ### `window`
 Reference to a window object. This will allow Simple Color Picker to apply event listeners in the correct context in the event that you are using it inside of an iFrame from a script that resides outside of it.
 
+## Properties
+
+### `.isChoosing`
+Is true when mouse is down and user is currently choosing a color.
+
 ## Methods
 
 ### `.appendTo(domElement | CSS selector)`

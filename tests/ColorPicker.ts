@@ -267,10 +267,21 @@ uiSuite('_moveSelectorTo()', () => {
   assert.is(picker.$sbSelector.style.transform, `translate(2px, ${picker._hueHeight}px)`)
 })
 
-// uiSuite('_updateColorFromPosition()', () => {
-//   const picker = new ColorPicker()
-//   // _updateColorFromPosition
-// })
+uiSuite('_updateColorFromPosition()', () => {
+  const picker = new ColorPicker()
+  const e1 = new window.MouseEvent('mousedown', { clientX: 10, clientY: 10 })
+  
+  assert.not(picker.isChoosing)
+  
+  // @ts-ignore
+  picker._onSaturationMouseDown(e1)
+  assert.ok(picker.isChoosing)
+  
+  // @ts-ignore
+  picker._onSaturationMouseUp()
+  assert.not(picker.isChoosing)
+
+})
 
 createSuite.run()
 methodSuite.run()
