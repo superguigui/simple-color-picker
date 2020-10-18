@@ -1,7 +1,7 @@
 {
   "name": "simple-color-picker",
-  "version": "0.1.2",
-  "description": "Simple Color picker in common.js.",
+  "version": "1.0.0",
+  "description": "Simple Color picker for the web",
   "author": "Guillaume Gouessan <guillaume.gouessan@gmail.com>",
   "license": "MIT",
   "repository": {
@@ -20,36 +20,33 @@
     "simple",
     "ui"
   ],
-  "main": "src/index.js",
-  "typings": "src/index.d.ts",
+  "source": "src/index.ts",
+  "main": "dist/simple-color-picker.js",
+  "module": "dist/simple-color-picker.module.js",
+  "unpkg": "dist/simple-color-picker.umd.js",
   "scripts": {
-    "start": "npm run example & npm run css:watch",
-    "example": "budo example/example.js:example/example-build.js --live | garnish",
-    "example:build": "browserify example/example.js | uglifyjs -nm > example/example-build.js",
-    "css": "stylus -u autoprefixer-stylus src/css -o ./src/",
-    "css:watch": "stylus -u autoprefixer-stylus src/css -w -o ./src/",
-    "test": "browserify test/test.js | tap-closer | smokestack | faucet",
-    "test:nc": "browserify test/test.js | smokestack | faucet"
+    "build": "microbundle --css-modules false",
+    "example": "rimraf example/dist && parcel example/src/index.html -d example/dist",
+    "example:build": "rimraf example/dist && parcel build example/src/index.html -d example/dist",
+    "test": "uvu -r ts-node/register tests -i \\d+.styl$",
+    "cover": "nyc npm test",
+    "gh-pages": "gh-pages -d example/dist -b gh-pages"
+  },
+  "nyc": {
+    "extends": "@istanbuljs/nyc-config-typescript"
   },
   "devDependencies": {
-    "autoprefixer-stylus": "^0.11.0",
-    "browserify": "^13.0.1",
-    "budo": "^9.3.0",
-    "faucet": "0.0.1",
-    "garnish": "^5.2.0",
-    "jsdom": "^9.4.1",
-    "raf": "^3.2.0",
-    "smokestack": "^3.4.1",
-    "stylus": "^0.54.5",
-    "tap-closer": "^1.0.0",
-    "tape": "^4.6.0",
-    "uglify-js": "^2.7.0",
-    "watchify": "^3.7.0"
+    "@istanbuljs/nyc-config-typescript": "^1.0.1",
+    "browser-env": "^3.3.0",
+    "gh-pages": "^3.1.0",
+    "microbundle": "^0.12.4",
+    "nyc": "^15.1.0",
+    "parcel-bundler": "^1.12.4",
+    "rimraf": "^3.0.2",
+    "stylus": "^0.54.8",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3",
+    "uvu": "^0.3.4"
   },
-  "dependencies": {
-    "component-emitter": "^1.2.1",
-    "dom-transform": "^2.1.0",
-    "is-number": "^3.0.0",
-    "tinycolor2": "^1.3.0"
-  }
+  "dependencies": {}
 }
