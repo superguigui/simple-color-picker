@@ -16,9 +16,9 @@ Or use UNPKG CDN to load it as an UMD module, ready to be used in your browser.
 
 ## Quickstart
 ```javascript
-var ColorPicker = require('simple-color-picker');
+import ColorPicker from 'simple-color-picker';
 
-var colorPicker = new ColorPicker();
+const colorPicker = new ColorPicker();
 ```
 
 And include `dist/simple-color-picker.css` in your html or import it in your css.
@@ -33,7 +33,7 @@ You can retrieve the current color in different formats by using these convenien
 ## Options
 Options you can pass to constructor in an object like so :
 ```javascript
-var colorPicker = new ColorPicker({
+const colorPicker = new ColorPicker({
   color: '#FF0000',
   background: '#454545',
   el: document.body,
