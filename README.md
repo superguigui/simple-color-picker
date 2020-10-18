@@ -2,7 +2,7 @@
 
 Simple Color picker.
 
-[demo](http://superguigui.github.io/simple-color-picker)
+[demo](https://superguigui.github.io/simple-color-picker)
 
 ## Installation
 [![NPM](https://nodei.co/npm/simple-color-picker.png)](https://nodei.co/npm/simple-color-picker/)
