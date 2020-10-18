@@ -5,7 +5,14 @@ Simple Color picker.
 [demo](https://superguigui.github.io/simple-color-picker)
 
 ## Installation
+You can simply install it via NPM
 [![NPM](https://nodei.co/npm/simple-color-picker.png)](https://nodei.co/npm/simple-color-picker/)
+
+Or use UNPKG CDN to load it as an UMD module, ready to be used in your browser.
+```html
+<link rel="stylesheet" href="https://unpkg.com/simple-color-picker/dist/simple-color-picker.css"/>
+<script src="https://unpkg.com/simple-color-picker/dist/simple-color-picker.umd.js"/>
+```
 
 ## Quickstart
 ```javascript
@@ -14,7 +21,7 @@ var ColorPicker = require('simple-color-picker');
 var colorPicker = new ColorPicker();
 ```
 
-And include `simple-color-picker.css` in your html or import it in your css.
+And include `dist/simple-color-picker.css` in your html or import it in your css.
 
 You can retrieve the current color in different formats by using these convenient methods: 
 * `colorPicker.getColor(); // output depends on previously inputed color format`
