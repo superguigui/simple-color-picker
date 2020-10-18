@@ -27,7 +27,7 @@
   "scripts": {
     "build": "microbundle --css-modules false",
     "example": "rimraf example/dist && parcel example/src/index.html -d example/dist",
-    "example:build": "rimraf example/dist && parcel build example/src/index.html -d example/dist",
+    "example:build": "rimraf example/dist && parcel build example/src/index.html --public-url '.' -d example/dist",
     "test": "uvu -r ts-node/register tests -i \\d+.styl$",
     "cover": "nyc npm test",
     "gh-pages": "gh-pages -d example/dist -b gh-pages"

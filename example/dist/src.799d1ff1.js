@@ -5,4 +5,4 @@ function t(t){return"number"==typeof t&&!isNaN(t)}function e(t,e,i){return Math.
 },{}],"Focm":[function(require,module,exports) {
 "use strict";var e=o(require("../../dist/simple-color-picker"));function o(e){return e&&e.__esModule?e:{default:e}}require("../../dist/simple-color-picker.css");var r=new e.default({el:document.body,color:"#123456",background:"#656565"});r.onChange(function(e){document.body.style.background=e,document.querySelector("h1 a").style.color=r.isDark()?"#FFFFFF":"#000000"});
 },{"../../dist/simple-color-picker":"A9FC","../../dist/simple-color-picker.css":"SplB"}]},{},["Focm"], null)
-//# sourceMappingURL=/src.799d1ff1.js.map
+//# sourceMappingURL=src.799d1ff1.js.map
