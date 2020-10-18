@@ -1,6 +1,6 @@
 {
   "name": "simple-color-picker",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple Color picker for the web",
   "author": "Guillaume Gouessan <guillaume.gouessan@gmail.com>",
   "license": "MIT",
@@ -24,6 +24,7 @@
   "main": "dist/simple-color-picker.js",
   "module": "dist/simple-color-picker.module.js",
   "unpkg": "dist/simple-color-picker.umd.js",
+  "amdName": "SimpleColorPicker",
   "scripts": {
     "build": "microbundle --css-modules false",
     "example": "rimraf example/dist && parcel example/src/index.html -d example/dist",
