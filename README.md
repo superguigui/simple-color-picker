@@ -10,7 +10,6 @@ You can simply install it via NPM
 
 Or use UNPKG CDN to load it as an UMD module, ready to be used in your browser.
 ```html
-<link rel="stylesheet" href="https://unpkg.com/simple-color-picker/dist/simple-color-picker.css"/>
 <script src="https://unpkg.com/simple-color-picker/dist/simple-color-picker.umd.js"/>
 ```
 
@@ -20,8 +19,6 @@ import ColorPicker from 'simple-color-picker';
 
 const colorPicker = new ColorPicker();
 ```
-
-And include `dist/simple-color-picker.css` in your html or import it in your css.
 
 You can retrieve the current color in different formats by using these convenient methods: 
 * `colorPicker.getColor(); // output depends on previously inputed color format`
@@ -111,3 +108,7 @@ Returns true if color is perceived as dark.
 
 ### `.isLight()`
 Returns true if color is perceived as light.
+
+## Styling
+The javascript module automatically injects a `<style>` tag with the css it needs at the very top of the HEAD of your HTML.
+If you want to override the default styles, just add your own styles in your page.

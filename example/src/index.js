@@ -1,5 +1,4 @@
 import ColorPicker from '../../dist/simple-color-picker'
-import '../../dist/simple-color-picker.css'
 
 /* --------------------------
   ColorPicker
