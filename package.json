@@ -1,6 +1,6 @@
 {
   "name": "simple-color-picker",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Simple Color picker for the web",
   "author": "Guillaume Gouessan <guillaume.gouessan@gmail.com>",
   "license": "MIT",
@@ -27,8 +27,6 @@
   "amdName": "SimpleColorPicker",
   "scripts": {
     "build": "microbundle --css-modules false --css-inject true --css-insert-at-top true",
-    "example": "rimraf example/dist && parcel example/src/index.html -d example/dist",
-    "example:build": "rimraf example/dist && parcel build example/src/index.html --public-url '.' -d example/dist",
     "test": "uvu -r ts-node/register tests",
     "cover": "nyc npm test",
     "gh-pages": "gh-pages -d example/dist -b gh-pages"
@@ -42,12 +40,9 @@
     "gh-pages": "^3.1.0",
     "microbundle": "github:superguigui/microbundle",
     "nyc": "^15.1.0",
-    "parcel-bundler": "^1.12.4",
-    "rimraf": "^3.0.2",
     "stylus": "^0.54.8",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.3",
     "uvu": "^0.3.4"
-  },
-  "dependencies": {}
+  }
 }
