@@ -12,6 +12,7 @@
   "bugs": {
     "url": "https://github.com/superguigui/simple-color-picker/issues"
   },
+  "types": "./dist/index.d.ts",
   "keywords": [
     "color",
     "picker",
