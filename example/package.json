@@ -1,10 +1,10 @@
 {
   "name": "simple-color-picker-example",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "",
   "main": "dist/index.html",
   "scripts": {
-    "start": "rimraf dist && parcel src/index.html --dist-dir dist",
+    "start": "rimraf dist && parcel src/index.html --dist-dir dist --no-cache",
     "build": "rimraf dist && parcel build src/index.html --public-url '.' --dist-dir dist"
   },
   "author": "",

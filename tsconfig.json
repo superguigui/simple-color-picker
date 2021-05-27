@@ -3,25 +3,18 @@
     "transpileOnly": true,
     "compilerOptions": {
       "module": "commonjs",
-      "sourceMap": true,
+      "sourceMap": true
     },
-    "include": [
-      "test/**/*"
-    ]
+    "include": ["test/**/*"]
   },
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
+    "target": "ESNext",
+    "module": "ESNext",
     "noEmit": true,
-		"declaration": true,
-		"moduleResolution": "node",
-		"esModuleInterop": true
+    "declaration": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true
   },
-  "include": [
-    "@types/**/*",
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["@types/**/*", "src/**/*"],
+  "exclude": ["node_modules"]
 }

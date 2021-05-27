@@ -1,6 +1,6 @@
 {
   "name": "simple-color-picker",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Simple Color picker for the web",
   "author": "Guillaume Gouessan <guillaume.gouessan@gmail.com>",
   "license": "MIT",
@@ -27,7 +27,7 @@
   "unpkg": "dist/simple-color-picker.umd.js",
   "amdName": "SimpleColorPicker",
   "scripts": {
-    "build": "microbundle --css-modules false --css-inject true --css-insert-at-top true",
+    "build": "microbundle --css inline",
     "test": "uvu -r ts-node/register tests",
     "cover": "nyc npm test",
     "gh-pages": "gh-pages -d example/dist -b gh-pages"
@@ -38,12 +38,16 @@
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "browser-env": "^3.3.0",
-    "gh-pages": "^3.1.0",
-    "microbundle": "github:superguigui/microbundle",
+    "gh-pages": "^3.2.0",
+    "microbundle": "^0.13.0",
     "nyc": "^15.1.0",
     "stylus": "^0.54.8",
-    "ts-node": "^9.0.0",
-    "typescript": "^4.0.3",
-    "uvu": "^0.3.4"
+    "ts-node": "^10.0.0",
+    "typescript": "^4.2.4",
+    "uvu": "^0.5.1"
+  },
+  "dependencies": {
+    "@types/insert-css": "^2.0.0",
+    "insert-css": "^2.0.0"
   }
 }
