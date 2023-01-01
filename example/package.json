@@ -11,6 +11,6 @@
   "license": "ISC",
   "devDependencies": {
     "rimraf": "^3.0.2",
-    "parcel": "^2.0.0-nightly.425"
+    "parcel": "^2.8.2"
   }
 }
