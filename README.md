@@ -86,7 +86,7 @@ Set the background color of the colorpicker. It also adds a 5px padding for desi
 Removes background of the colorpicker if previously set. It's no use calling this method if you didn't set the `background` option or if you didn't call `setBackgroundColor` previously.
 
 ### `.onChange(callback)`
-Registers callback to the update event of the colorpicker. ColorPicker inherits from [component/emitter](https://github.com/component/emitter) so you could do the same thing by calling `colorPicker.on('update');`
+Registers callback to the update event of the colorpicker.
 
 ### `.getColor()`
 Main color getter, will return a formatted color string depending on input or a number depending on the last setColor call.
