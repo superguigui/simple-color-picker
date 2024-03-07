@@ -78,8 +78,6 @@ export declare class ColorPicker {
     setNoBackground(): ColorPicker;
     /**
      * Registers callback to the update event of the picker.
-     * picker inherits from [component/emitter](https://github.com/component/emitter)
-     * so you could do the same thing by calling `colorPicker.on('update');`
      * @param  {Function} callback
      * @return {ColorPicker} Returns itself for chaining purpose
      */
